@@ -14,7 +14,7 @@ app.get("/tabledata", async (req, res) => {
 
   async function getMyPagedRows(nextToken = undefined) {
     datastore
-      .table(5295000000179049)
+      .table(tableID)
       .getPagedRows({ nextToken, maxRows: 100 }) //Define the maximum rows to be fetched in a single page and pass it along with nextToken
       .then(({ data, next_token, more_records }) => {
         console.log("rows : ", data);
@@ -33,7 +33,7 @@ app.get("/tabledata", async (req, res) => {
 
 app.post("/data", (req, res)=>{
        var catalystApp = catalyst.initialize(req);
-       var table = catalystApp.datastore().table(5295000000179049)
+       var table = catalystApp.datastore().table(tableID)
 
        var details = {
             Name: req.body.Name,
@@ -53,7 +53,7 @@ app.post("/data", (req, res)=>{
 
 app.post('/update', (req, res)=>{
      var catalystApp = catalyst.initialize(req);
-     var table = catalystApp.datastore().table(5295000000179049);
+     var table = catalystApp.datastore().table(tableID);
 
     data = 
       {
@@ -77,7 +77,7 @@ app.post('/update', (req, res)=>{
 
 app.delete('/delete', (req, res)=>{
   var catalystApp = catalyst.initialize(req);
-  var table = catalystApp.datastore().table(5295000000179049)
+  var table = catalystApp.datastore().table(tableID)
 
   var row = table.deleteRow(req.body.ROWID);
   // var rowPromise = row.delete();
